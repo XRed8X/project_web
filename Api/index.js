@@ -10,6 +10,7 @@ const app = express();
 
 mongoose.connect(process.env.url)
 .then(() => console.log('Conectado a la base de datos')) // Si conecta nos muestra este mensaje
+.catch((err) => console.log(err)) // Si no conecta nos muestra el error
 
 app.use(cors())
 app.use(helmet())
