@@ -1,15 +1,13 @@
 import { Schema, model } from 'mongoose';
 
-const CalificationsSchema = new Schema([
+const GradesSchema = new Schema([
     {
-        user: {
+        id_group: {
             type: Schema.Types.ObjectId,
-            ref: 'user',
             required: true
         },
-        event: {
+        id_event: {
             type: Schema.Types.ObjectId,
-            ref: 'event',
             required: true
         },
         round: {
@@ -18,13 +16,16 @@ const CalificationsSchema = new Schema([
         },
         scores: [
             {
-                metric: {
+                id_metric: {
                     type: Schema.Types.ObjectId,
-                    ref: 'event',
                     required: true
                 },
                 score: {
                     type: Number,
+                    required: true
+                },
+                id_judge: {
+                    type: Schema.Types.ObjectId,
                     required: true
                 }
             }
@@ -32,4 +33,4 @@ const CalificationsSchema = new Schema([
     }
 ]);
 
-export const CalificationsModel = model('calification', CalificationsSchema);
+export const GradesModel = model('grades', GradesSchema);

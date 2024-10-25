@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const UsersSchema = new Schema([
+const UserSchema = new Schema([
     {
         name: {
             type: String,
@@ -15,6 +15,12 @@ const UsersSchema = new Schema([
         }
     },
     {
+        password: {
+            type: String,
+            required: true
+        }
+    },
+    {
         curp: {
             type: String,
             required: true,
@@ -24,11 +30,11 @@ const UsersSchema = new Schema([
     {
         rol: {
             type: String,
-            enum: ["admin", "judge", "user"],
+            enum: ["admin", "judge", "participant"],
             lowercase: true,
             required: true
         }
     }
 ]);
 
-export const UsersMoel = model("user", UsersSchema);
+export const UserModel = model("user", UserSchema);

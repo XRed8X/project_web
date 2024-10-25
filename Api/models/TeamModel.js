@@ -8,18 +8,12 @@ const TeamSchema = new Schema([
         }
     },
     {
-        participants: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'user'
-            }
-        ]
+        id_members: []
     },
     {
         leader: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'user'
             }
         ]
     },
@@ -30,12 +24,7 @@ const TeamSchema = new Schema([
         }
     },
     {
-        califications: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'calification'
-            }
-        ]
+        grades: []
     }
 ]);
 
