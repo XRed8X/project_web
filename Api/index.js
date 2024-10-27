@@ -4,7 +4,9 @@ import helmet from 'helmet'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import { register, login, updateProfile } from './controller/UsersController.js';
-
+import { createEvent } from './controller/EventsController.js';
+ 
+ // Rutas de la API
 
 dotenv.config()
 
@@ -23,5 +25,7 @@ app.get("/", (req, res) => res.send("Mayo Server"))
 app.post("/user/register", register)
 app.post("/user/login", login)
 app.put("/user/update-profile/:_id", updateProfile)
+
+app.post("/event/create/", createEvent)
 
 app.listen(4000, ()=>console.log("Server is running"))

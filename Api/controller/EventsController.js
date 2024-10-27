@@ -3,22 +3,14 @@
 // Cambiar status
 // CAmbiar ronda (Eliminar equipos)
 
-import { EventModel } from "../models/EventsModel";
+import { EventModel } from "../models/EventsModel.js";
 
 export const createEvent = async (req, res) => {
     try {
-        // Validacion de que metricas son un arreglo
-        if (!Array.isArray(req.params.metrics)) {
-            return res.status(400).json({message: "Debe enviar un arreglo de métricas"})
-        }
 
-        // Validacion de que metricas tiene al menos una metrica
-        if (req.params.metrics.length === 0) {
-            return res.status(400).json({message: "Debe enviar al menos una métrica"})
-        }
-        // if (!Array.isArray(req.body.metrics) || req.body.metrics.length === 0) {
-        //     return res.status(400).json({message: "Debe enviar un arreglo de métricas"})
-        // }
+         if (!Array.isArray(req.body.metrics) || req.body.metrics.length === 0) {
+             return res.status(400).json({message: "Debe enviar un arreglo de métricas"})
+         }
 
         // Validacion de que descripcion y max_points exista
         const incompleteMetrics = req.body.metrics.filter(metric => (!metric.description) || (!metric.max_points));
