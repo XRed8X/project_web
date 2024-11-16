@@ -2,6 +2,11 @@ import { Schema, model } from 'mongoose';
 
 const TeamSchema = new Schema([
     {
+        id_team: {
+            type: Schema.Types.ObjectId
+        },
+    },
+    {
         name: {
             type: String,
             required: true

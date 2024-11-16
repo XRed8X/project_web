@@ -1,6 +1,6 @@
 // Registro
 // Inicio de sesion
-// Actalizar perfil (lider)
+// Actualizar perfil (lider)
 
 import { UserModel } from "../models/UsersModel.js";
 import bcrypt from "bcrypt"

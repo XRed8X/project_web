@@ -5,8 +5,6 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import { register, login, updateProfile } from './controller/UsersController.js';
 import { createEvent } from './controller/EventsController.js';
- 
- // Rutas de la API
 
 dotenv.config()
 
