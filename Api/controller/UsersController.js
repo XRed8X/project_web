@@ -30,7 +30,7 @@ export const login = async (req, res) => {
     // Implementar la lógica para iniciar sesión
     try {
         const email = req.body.email;
-    const password = req.body.password;
+        const password = req.body.password;
 
     if(!email || !password) {
         return res.status(400).json({ message: "Debes proporcionar email y contraseña" });
@@ -41,12 +41,13 @@ export const login = async (req, res) => {
         return res.status(404).json({ message: "Credenciales no validas" });
     }
 
-    if(!bcrypt.compare(password, user.password)) {
+    if(!(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ message: "Credenciales no validas" });
     }
 
+
     // Creacion de JSON web token
-    const token = await jwt.sign(user, process.env.PRIVATE_KEY)
+    const token = await jwt.sign(JSON.stringify(user),process.env.PRIVATE_KEY)
     return res.status(202).json({ token });
     } catch(err) {
         console.error(err);
