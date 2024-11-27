@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Login } from './components/login';
 import { RegisterParticipants } from './participants/RegisterParticipants';
+import { CrearEvento } from './admins/CreateEvents'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     path: "/register-participants",
     element: <RegisterParticipants/>,
   },
+  {
+    path: "/crear-evento",
+    element: <CrearEvento/>,
+  }
 ]);
 
 function App() {
