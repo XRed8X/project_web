@@ -50,26 +50,32 @@ export const validateEvent = async (metrics, name, max_round) => {
 export const createEvent = async (req, res) => {
 
     try {
+        const { metrics, name, max_round } = req.body;
 
-        const {metrics, name, max_round} = req.body;
-        const {isValid, msg} = validateEvent(metrics, name, max_round);
-        
-        // if (!isValid) {
-        //     return res.status(400).json({message: "Sintaxis invalida", msg})
-        // }
-        
+        // Validación explícita
+        if (!name || !max_round) {
+            return res.status(400).json({ 
+                message: "Los campos `name` y `max_round` son obligatorios."
+            });
+        }
+
         const event = {
-            name: req.body.name,
-            metrics: req.body.metrics,
-            max_round: req.body.max_round,
-            max_points: req.body.max_points
+            name,
+            metrics: metrics || [],
+            max_round,
+            max_points: req.body.max_points || 0
         };
-        await EventModel.create(event)
-        res.status(201).json({ message: "Evento creado correctamente", event })
+
+        // Crear evento
+        const createdEvent = await EventModel.create(event);
+        res.status(201).json({ message: "Evento creado correctamente", event: createdEvent });
+        console.log(req.body);
+
 
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: "Error al crear el evento", details: err.message });
+
     }
 }
 
