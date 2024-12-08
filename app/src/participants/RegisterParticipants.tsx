@@ -2,14 +2,7 @@ import { useState } from "react";
 import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import axios, { AxiosError } from "axios";
-
-interface IUser {
-    name: string;
-    email: string;
-    curp: string;
-    password: string;
-    rol: string;
-}
+import { IUser } from "../types";
 
 export const RegisterParticipants = () => {
     const [data, setData] = useState<IUser>({
@@ -87,7 +80,7 @@ export const RegisterParticipants = () => {
                         </Row>
                         <Row className="mb-3">
                             <Col className="d-grid">
-                                <Button type="submit" style={{ backgroundColor: "#e63946", borderColor: "#e63946",}} onClick = {() => onSubmit()} >Ingresar</Button>
+                                <Button type="submit" style={{ backgroundColor: "#e63946", borderColor: "#e63946",}} onClick = {() => onSubmit()} >Register</Button>
                             </Col>
                         </Row>
                         {/* <Row>

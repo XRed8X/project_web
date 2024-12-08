@@ -90,3 +90,13 @@ export const updateProfile = async (req, res) => {
         return res.status(500).json({ error: "Error al actualizar el usuario", details: err.message });
     }
 };
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await UserModel.find();
+        return res.status(200).json(users);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({error: "Error al obtener los usuarios", details: err.message});
+    }
+};

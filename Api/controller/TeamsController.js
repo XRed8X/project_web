@@ -1,35 +1,35 @@
 // Crear el equipo
 // Inscribirse al evento
 
-import { TeamModel } from "../models/TeamModel";
+import { TeamModel } from "../models/TeamModel.js";
 
 export const createTeam = async (req, res) => {
     try {
 
         // Validar que el nombre del equipo contenga solo caracteres alfanumericos (el unico caracter especial permitido es "-")
-        const regex = /^[a-zA-Z0-9-]+$/;
+        const regex = /^[a-zA-Z0-9-\s]+$/;
         if (!regex.test(req.body.name)) {
             return res.status(400).json({message: "El nombre del equipo solo puede contener caracteres alfanumericos"})
         }
 
         // Validar una longitud minima y maxima para el nombre del equipo
-        if (req.body.name.length < 3 || req.body.name.length > 15) {
+        if (req.body.name.length < 3 || req.body.name.length > 50) {
             return res.status(400).json({message: "El nombre del equipo debe tener entre 3 y 15 caracteres"})
         }
 
         // Validar que los miembros sea un tipo de dato entero
-        if(!Array.isArray(req.body.members) || !req.body.members.every(id => typeof id === "number")) {
-            return res.status(400).json({message: "Los miembros deben ser un arreglo de enteros"})
-        }
+        // if(!Array.isArray(req.body.members) || !req.body.members.every(id => typeof id === "number")) {
+        //     return res.status(400).json({message: "Los miembros deben ser un arreglo de enteros"})
+        // }
 
         // Validar que el equipo no exeda los 8 participantes
-        if (req.body.members.length > 8) {
-            return res.status(400).json({message: "El equipo no debe de exeder los 8 participantes"})
-        }
+        // if (req.body.members.length > 8) {
+        //     return res.status(400).json({message: "El equipo no debe de exeder los 8 participantes"})
+        // }
 
         const team = {
             name: req.body.name,
-            id_members: req.body.members,
+            // id_members: req.body.members,
             leader: req.body.leader
         }
         await TeamModel.create(team)
@@ -72,4 +72,14 @@ export const registerEvent = async (req, res) => {
         console.log(err)
         return res.status(500).json({message: "Hubo un error al inscribirse al evento"})
     }
-}
+};
+
+export const getTeam = async (req, res) => {
+    try {
+        const team = await TeamModel.find()
+        return res.status(200).json(team)
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({error: "Error al obtener los equipos", details: err.message});
+    }
+};

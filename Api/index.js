@@ -5,6 +5,10 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import { register, login, updateProfile } from './controller/UsersController.js';
 import { createEvent } from './controller/EventsController.js';
+import { createTeam } from './controller/TeamsController.js';
+import { getUsers } from './controller/UsersController.js';
+import { getEvent } from './controller/EventsController.js';
+import { getTeam } from './controller/TeamsController.js'; 
 
 dotenv.config()
 
@@ -20,10 +24,18 @@ app.use(express.json());
 
 app.get("/", (req, res) => res.send("Mayo Server"))
 
+// Rutas de usuarios
 app.post("/user/register", register)
 app.post("/user/login", login)
 app.put("/user/update-profile/:_id", updateProfile)
+app.get("/user/list", getUsers)
 
+// Rutas de eventos
 app.post("/event/create/", createEvent)
+app.get("/event/list", getEvent)
+
+//Rutas de teams
+app.post("/teams/create", createTeam)
+app.get("/team/list", getTeam)
 
 app.listen(4000, ()=>console.log("Server is running"))

@@ -4,19 +4,7 @@ import { Trash } from 'react-bootstrap-icons';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from "sweetalert2";
 import axios, { AxiosError } from "axios";
-
-interface IMetric {
-  description: string;
-  max_points: number;
-  id: string; // Agrego esto para darle un id a cada metrica
-}
-
-interface IEvent {
-  name: string;
-  max_round: number;
-  metrics: IMetric[];
-}
-
+import { IMetric, IEvent } from '../types';
 
 export const CrearEvento = () => {
   
@@ -92,7 +80,6 @@ export const CrearEvento = () => {
                   type="text"
                   placeholder="Nombre del evento"
                   name="name"
-                  // value={event.title}
                   onChange={onChangeBasicFields}
                   className="mb-3"
                 />
@@ -100,7 +87,6 @@ export const CrearEvento = () => {
                   type="number"
                   placeholder="Máximo de rondas"
                   name="max_round"
-                  // value={event.max_round}
                   onChange={onChangeBasicFields}
                   className="mb-3"
                 />
@@ -122,7 +108,6 @@ export const CrearEvento = () => {
                         type="number"
                         placeholder="Máximo de puntos"
                         name="max_points"
-                        // value={metric.max_points}
                         onChange={(e) => onChangeMetric(e, index)}
                       />
                     </Col>

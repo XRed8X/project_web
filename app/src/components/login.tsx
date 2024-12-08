@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import axios, { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [data, setData] =useState({});
+    const navigate = useNavigate()
 
     const onChange = (e:any) => {
         e.preventDefault()
@@ -15,10 +17,16 @@ export const Login = () => {
 
     const onSubmit = async () => {
         try {
-            Swal.fire("Guardando datos");
+            Swal.fire({
+                title: 'Login Successful!',
+                text: 'Welcome back!',
+                icon: 'success',
+                confirmButtonText: 'Go to Home',
+                }).then(() => {
+                    navigate("/home", { replace: true });
+                })
             Swal.showLoading();
             await axios.post("http://localhost:4000/user/login", data);
-            Swal.fire("Sesion con exito", "Success");
         } catch (err) {
             Swal.fire("Algo salio mal :( ", (err as AxiosError).message, "error");
         }

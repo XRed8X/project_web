@@ -233,4 +233,14 @@ export const changeRound = async (req, res) => {
         return res.status(500).json({ error: "Error al cambiar la ronda", details: err.message });
     }
 
-}
+};
+
+export const getEvent = async (req, res) => {
+    try {
+        const event = await EventModel.find()
+        return res.status(200).json(event)
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({error: "Error al obtener los eventos", details: err.message});
+    }
+};
